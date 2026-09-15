@@ -6,12 +6,12 @@ from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 
-from tools import python_exec_tool
+from tools import python_exec_tool, file_write_tool
 
 
 load_dotenv()
 
-tools = [python_exec_tool]
+tools = [python_exec_tool, file_write_tool]
 
 llm = ChatOpenAI(model='gpt-4o')
 graph = create_agent(llm, tools)
@@ -37,6 +37,7 @@ if __name__ == "__main__":
         {
             "messages": [
                 "첫 번째 항이 1인 피보나치 후열을 출력하는 파이썬 코드를 작성해주세요."
+                "확인했다면 그 코드는 .py 파일로 저장하세요."
             ]
         }
     )

@@ -36,3 +36,26 @@ def python_exec_tool(
     
     return result_str
     
+# 파일 저장 도구 생성하기
+@tool
+def file_write_tool(
+    file_path: str = Field(description="생성/수정할 파일의 경로"),
+    content: str = Field(description="파일에 작성할 내용")
+) -> str:
+    """
+    파일을 생성하거나 내용을 작성하는 도구입니다.
+    
+    Args:
+        file_path: 생성/수정할 파일의 경로
+        content: 파일에 작성할 내용
+        
+    Returns:
+        성공/실패 메시지
+    """
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return f"파일 '{file_path}'에 성공적으로 저장했습니다."
+    except Exception as e:
+        return f"파일 작성 실패: {repr(e)}"
+    
